@@ -7,6 +7,7 @@ public class Door : MonoBehaviour {
 
 
 	void Awake(){
+		Input.multiTouchEnabled = true;
 		xPosition = transform.position.x;
 	}
 	// Use this for initialization
@@ -16,6 +17,19 @@ public class Door : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		foreach (Touch touch in Input.touches){
+			Ray ray = Camera.main.ScreenPointToRay(touch.position);
+			RaycastHit hit = new RaycastHit();
+			if (Physics.Raycast (ray,out hit, 100)) {
+				if(touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved) {
+					Vector3 cameraTransform = Camera.main.transform.InverseTransformPoint(0, 0, 0);
+					Vector3 tmp = Camera.main.ScreenToWorldPoint(new Vector3 (touch.position.x, touch.position.y, (cameraTransform.z - 0.5f)));
+					transform.position = new Vector3(tmp.x,transform.position.y,transform.position.z);
+				}
+			}
+		}
+
+
 		if (isLeft) {
 			if (transform.position.x < xPosition){
 				transform.position = new Vector3(xPosition,transform.position.y,transform.position.z);
@@ -26,7 +40,7 @@ public class Door : MonoBehaviour {
 			}
 		}
 	}
-
+	/*
 	IEnumerator OnMouseDown()
 	{
 		//将<strong>物体</strong>由世界坐标系转化为屏幕坐标系    ，由vector3 结构体变量ScreenSpace存储，以用来明确屏幕坐标系Z轴的位置
@@ -49,6 +63,10 @@ public class Door : MonoBehaviour {
 			yield return new WaitForFixedUpdate();
 		}
 	}
+	*/
 
-
+	
+	
+	
+	
 }
