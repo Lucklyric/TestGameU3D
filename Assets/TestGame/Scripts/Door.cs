@@ -1,46 +1,64 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Door : MonoBehaviour {
-	public bool isLeft;
-	private float xPosition;
+public class Door : MonoBehaviour
+{
+		public bool isLeft;
+		private float xPosition;
+		int counter;
+		public float speed = 1.00f;
+		bool isTouching = false;
+		private Touch saveTouch;
+		private Vector3 offset, screenSpace;
 
-
-	void Awake(){
-		Input.multiTouchEnabled = true;
-		xPosition = transform.position.x;
-	}
-	// Use this for initialization
-	void Start () {
+		void Awake ()
+		{
+				Input.multiTouchEnabled = true;
+				xPosition = transform.position.x;
+		}
+		// Use this for initialization
+		void Start ()
+		{
 		
-	}
+		}
 	
-	// Update is called once per frame
-	void Update () {
-		foreach (Touch touch in Input.touches){
-			Ray ray = Camera.main.ScreenPointToRay(touch.position);
-			RaycastHit hit = new RaycastHit();
-			if (Physics.Raycast (ray,out hit, 100)) {
-				if(touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved) {
-					Vector3 cameraTransform = Camera.main.transform.InverseTransformPoint(0, 0, 0);
-					Vector3 tmp = Camera.main.ScreenToWorldPoint(new Vector3 (touch.position.x, touch.position.y, (cameraTransform.z - 0.5f)));
-					transform.position = new Vector3(tmp.x,transform.position.y,transform.position.z);
+		// Update is called once per frame
+		void Update ()
+		{
+
+				foreach (Touch curTouch in Input.touches) {
+						Ray ray = Camera.main.ScreenPointToRay (curTouch.position);
+						RaycastHit hit;
+						if (Physics.Raycast (ray, out hit, 100)) {
+								if (hit.collider == this.collider) {
+										if (curTouch.phase == TouchPhase.Began) {
+												screenSpace = Camera.main.WorldToScreenPoint (this.transform.position);//将世界坐标点转为屏幕坐标点
+												offset = this.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (curTouch.position.x, curTouch.position.y, screenSpace.z));
+										}
+										//if (curTouch.phase == TouchPhase.Moved) {
+										//var cameraTransform = Camera.main.transform.InverseTransformPoint (0, 0, 0);
+										//object.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (touch.position.x, touch.position.y, cameraTransform.z - 0.5));
+										Vector3 curScreenSpace = new Vector3 (curTouch.position.x, curTouch.position.y, screenSpace.z);//获得初点的屏幕坐标点
+										Vector3 curPosition = Camera.main.ScreenToWorldPoint (curScreenSpace) + offset;//换算出目标点的世界坐标						
+										transform.position = new Vector3 (curPosition.x, transform.position.y, transform.position.z);
+										//}
+								}
+						}
+						
 				}
-			}
+				
+				
+				if (isLeft) {
+						if (transform.position.x < xPosition) {
+								transform.position = new Vector3 (xPosition, transform.position.y, transform.position.z);
+						}
+				} else {
+						if (transform.position.x > xPosition) {
+								transform.position = new Vector3 (xPosition, transform.position.y, transform.position.z);
+						}
+				}
 		}
-
-
-		if (isLeft) {
-			if (transform.position.x < xPosition){
-				transform.position = new Vector3(xPosition,transform.position.y,transform.position.z);
-			}
-		}else{
-			if (transform.position.x > xPosition){
-				transform.position = new Vector3(xPosition,transform.position.y,transform.position.z);
-			}
-		}
-	}
-	/*
+		/*
 	IEnumerator OnMouseDown()
 	{
 		//将<strong>物体</strong>由世界坐标系转化为屏幕坐标系    ，由vector3 结构体变量ScreenSpace存储，以用来明确屏幕坐标系Z轴的位置
@@ -65,8 +83,4 @@ public class Door : MonoBehaviour {
 	}
 	*/
 
-	
-	
-	
-	
 }
