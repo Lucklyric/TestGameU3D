@@ -1,15 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TestGame/Scripts/Test1/T1torus.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TestGame/Scripts/pillarright.cs">
     <Files>
       <File FileName="Assets/TestGame/Scripts/Door.cs" Line="61" Column="8" />
       <File FileName="../../../../../../Dropbox/Bussiness/Trade/ISPService.cs" Line="1" Column="1" />
       <File FileName="../../../../../../Downloads/ISPService (1).cs" Line="1" Column="1" />
       <File FileName="Assets/TestGame/Scripts/torus.cs" Line="1" Column="1" />
-      <File FileName="Assets/TestGame/Scripts/pillarright.cs" Line="1" Column="1" />
+      <File FileName="Assets/TestGame/Scripts/pillarright.cs" Line="17" Column="1" />
       <File FileName="Assets/TestGame/Scripts/GameController.cs" Line="1" Column="1" />
       <File FileName="Assets/TestGame/Scripts/MainPage/ManController.cs" Line="1" Column="1" />
-      <File FileName="Assets/TestGame/Scripts/Test1/T1torus.cs" Line="13" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

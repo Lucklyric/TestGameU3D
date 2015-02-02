@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameController: MonoBehaviour {
+public class pole : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -11,10 +11,5 @@ public class GameController: MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-	}
-
-
-	public void BackToHomePage(){
-		Application.LoadLevel (0);
 	}
 }

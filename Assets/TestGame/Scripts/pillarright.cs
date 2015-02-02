@@ -13,9 +13,5 @@ public class pillarright : MonoBehaviour {
 	void Update () {
 	
 	}
-
-	void OnTriggerEnter(Collider collider)
-	{
-
-	}
+	
 }

@@ -12,13 +12,24 @@ public class T1torus : MonoBehaviour
 		/// <summary>
 		/// cache reference to the SphereCollider 
 		/// </summary>
-		private BoxCollider _boxCollider;
+		public BoxCollider _boxCollider;
 		public GameObject _touchTrigger;
+		public pole goalPole;
+
+		private GameController _GameController;
+		/// <summary>
+		/// Delegate method used by observing parties of the OnNet event 
+		/// </summary>
+		public delegate void GetIn ();
+		/// <summary>
+		/// Event raised when a collision occurs on the net collider  
+		/// </summary>
+		public GetIn onGetIn = null;
 
 		void Awake ()
 		{
 				_rigidbody = GetComponent<Rigidbody> (); 
-				_boxCollider = GetComponent<BoxCollider> ();
+				
 				lowerY = transform.position.y;
 				Input.multiTouchEnabled = true;
 				touching = false;
@@ -41,6 +52,7 @@ public class T1torus : MonoBehaviour
 		void Start ()
 		{
 				//touchTriggerOffset = transform.position - _touchTrigger.transform.position;
+				_GameController = GameController.SharedInstance;
 		}
 	
 		// Update is called once per frame
@@ -74,12 +86,22 @@ public class T1torus : MonoBehaviour
 				if (isTouching) {
 						this.rigidbody.useGravity = false;	
 						this.touching = true;
+						
+						
 				} else {
 						this.rigidbody.useGravity = true;
 						this.touching = false;
+						
 				}
 		}
 
+		void OnTriggerEnter (Collider other)
+		{
+				if (other == goalPole.collider) {
+					_GameController.OnRing();
+				}
+		
+		}
 //	IEnumerator OnMouseDown()
 //	{
 //		//将<strong>物体</strong>由世界坐标系转化为屏幕坐标系    ，由vector3 结构体变量ScreenSpace存储，以用来明确屏幕坐标系Z轴的位置

@@ -9,10 +9,13 @@ public class torus : MonoBehaviour
 		private float lowerY;
 		private Rigidbody _rigidbody;
 		private bool touching;
+		
 		/// <summary>
 		/// cache reference to the SphereCollider 
 		/// </summary>
 		private BoxCollider _boxCollider;
+
+		
 
 		void Awake ()
 		{
@@ -78,6 +81,7 @@ public class torus : MonoBehaviour
 						this.touching = false;
 				}
 		}
+
 
 //	IEnumerator OnMouseDown()
 //	{
