@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\TestGame\Scripts\Door.cs" />
+     <Compile Include="Assets\TestGame\Scripts\GameController.cs" />
+     <Compile Include="Assets\TestGame\Scripts\MainPage\ManController.cs" />
+     <Compile Include="Assets\TestGame\Scripts\Test1\T1torus.cs" />
      <Compile Include="Assets\TestGame\Scripts\pillarright.cs" />
      <Compile Include="Assets\TestGame\Scripts\raypos.cs" />
      <Compile Include="Assets\TestGame\Scripts\torus.cs" />

@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class pillarright : MonoBehaviour {
-
+public class ManController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -14,8 +13,7 @@ public class pillarright : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter(Collider collider)
-	{
-
+	public void JumpToTestSceneWithIndex(int index){
+		Application.LoadLevel (index);
 	}
 }

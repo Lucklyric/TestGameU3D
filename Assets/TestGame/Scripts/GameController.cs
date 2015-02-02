@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class pillarright : MonoBehaviour {
-
+public class GameController: MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -14,8 +13,8 @@ public class pillarright : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter(Collider collider)
-	{
 
+	public void BackToHomePage(){
+		Application.LoadLevel (0);
 	}
 }

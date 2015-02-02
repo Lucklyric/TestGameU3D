@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent (typeof(BoxCollider))]
 [RequireComponent (typeof(Rigidbody))]
-public class torus : MonoBehaviour
+public class T1torus : MonoBehaviour
 {
 		private Vector3 offset, screenSpace;
 		private float lowerY;
@@ -13,6 +13,7 @@ public class torus : MonoBehaviour
 		/// cache reference to the SphereCollider 
 		/// </summary>
 		private BoxCollider _boxCollider;
+		public GameObject _touchTrigger;
 
 		void Awake ()
 		{
@@ -50,7 +51,7 @@ public class torus : MonoBehaviour
 						Ray ray = Camera.main.ScreenPointToRay (curTouch.position);
 						RaycastHit hit;
 						if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
-								if (hit.collider == this.collider) {
+								if (hit.collider == this._touchTrigger.collider) {
 										isTouching = true;
 										if (curTouch.phase == TouchPhase.Began && this.touching == false) {
 												screenSpace = Camera.main.WorldToScreenPoint (this.transform.position);//将世界坐标点转为屏幕坐标点
