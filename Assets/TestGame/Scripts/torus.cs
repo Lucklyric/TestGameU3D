@@ -1,65 +1,84 @@
 ﻿using UnityEngine;
 using System.Collections;
-[RequireComponent (typeof (BoxCollider))]
-[RequireComponent (typeof (Rigidbody))]
-public class torus : MonoBehaviour {
-	private Vector3 offset, screenSpace;
-	private Rigidbody _rigidbody; 
-	public GameObject _touchTrigger;
-	
-	/// <summary>
-	/// cache reference to the SphereCollider 
-	/// </summary>
-	private BoxCollider _boxCollider; 
 
-	void Awake(){
-		_rigidbody = GetComponent<Rigidbody>(); 
-		_boxCollider = GetComponent<BoxCollider>();
-		Input.multiTouchEnabled = true;
-	}
+[RequireComponent (typeof(BoxCollider))]
+[RequireComponent (typeof(Rigidbody))]
+public class torus : MonoBehaviour
+{
+		private Vector3 offset, screenSpace;
+		private float lowerY;
+		private Rigidbody _rigidbody;
+		public GameObject _touchTrigger;
+		private bool touching;
+		/// <summary>
+		/// cache reference to the SphereCollider 
+		/// </summary>
+		private BoxCollider _boxCollider;
 
-
-	public Rigidbody torusRigidBody{
-		get{
-			return _rigidbody;	
+		void Awake ()
+		{
+				_rigidbody = GetComponent<Rigidbody> (); 
+				_boxCollider = GetComponent<BoxCollider> ();
+				lowerY = transform.position.y;
+				Input.multiTouchEnabled = true;
+				touching = false;
 		}
-	}
-	
-	public BoxCollider torusBoxCollider{
-		get{
-			return _boxCollider; 	
-		}
-	}
 
-
-	// Use this for initialization
-	void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		foreach (Touch curTouch in Input.touches) {
-			Ray ray = Camera.main.ScreenPointToRay (curTouch.position);
-			RaycastHit hit;
-			if (Physics.Raycast (ray, out hit, 500)) {
-				if (hit.collider == this._touchTrigger.collider) {
-					if (curTouch.phase == TouchPhase.Began) {
-						screenSpace = Camera.main.WorldToScreenPoint (this.transform.position);//将世界坐标点转为屏幕坐标点
-						offset = this.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (curTouch.position.x, curTouch.position.y, screenSpace.z));
-					}
-					//if (curTouch.phase == TouchPhase.Moved) {
-					//var cameraTransform = Camera.main.transform.InverseTransformPoint (0, 0, 0);
-					//object.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (touch.position.x, touch.position.y, cameraTransform.z - 0.5));
-					Vector3 curScreenSpace = new Vector3 (curTouch.position.x, curTouch.position.y, screenSpace.z);//获得初点的屏幕坐标点
-					Vector3 curPosition = Camera.main.ScreenToWorldPoint (curScreenSpace) + offset;//换算出目标点的世界坐标						
-					transform.position = new Vector3 (curPosition.x, curPosition.y, transform.position.z);
-					//}
+		public Rigidbody torusRigidBody {
+				get {
+						return _rigidbody;	
 				}
-			}
-			
 		}
-	}
+	
+		public BoxCollider torusBoxCollider {
+				get {
+						return _boxCollider; 	
+				}
+		}
+
+
+		// Use this for initialization
+		void Start ()
+		{
+				//touchTriggerOffset = transform.position - _touchTrigger.transform.position;
+		}
+	
+		// Update is called once per frame
+		void Update ()
+		{
+				bool isTouching = false;
+				foreach (Touch curTouch in Input.touches) {
+						Ray ray = Camera.main.ScreenPointToRay (curTouch.position);
+						RaycastHit hit;
+						if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
+								if (hit.collider == this._touchTrigger.collider) {
+										isTouching = true;
+										if (curTouch.phase == TouchPhase.Began && this.touching == false) {
+												screenSpace = Camera.main.WorldToScreenPoint (this.transform.position);//将世界坐标点转为屏幕坐标点
+												offset = this.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (curTouch.position.x, curTouch.position.y, screenSpace.z));
+										}
+										//if (curTouch.phase == TouchPhase.Moved) {
+										//var cameraTransform = Camera.main.transform.InverseTransformPoint (0, 0, 0);
+										//object.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (touch.position.x, touch.position.y, cameraTransform.z - 0.5));
+										Vector3 curScreenSpace = new Vector3 (curTouch.position.x, curTouch.position.y, screenSpace.z);//获得初点的屏幕坐标点
+										Vector3 curPosition = Camera.main.ScreenToWorldPoint (curScreenSpace) + offset;//换算出目标点的世界坐标						
+										transform.position = new Vector3 (curPosition.x, curPosition.y, transform.position.z);
+										//}
+										break;
+								}
+								
+						}
+						
+				}
+
+				if (isTouching) {
+						this.rigidbody.useGravity = false;	
+						this.touching = true;
+				} else {
+						this.rigidbody.useGravity = true;
+						this.touching = false;
+				}
+		}
 
 //	IEnumerator OnMouseDown()
 //	{

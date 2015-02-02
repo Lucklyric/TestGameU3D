@@ -1,11 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TestGame/Scripts/torus.cs">
     <Files>
       <File FileName="Assets/TestGame/Scripts/Door.cs" Line="12" Column="1" />
       <File FileName="../../../../../../Dropbox/Bussiness/Trade/ISPService.cs" Line="1" Column="1" />
       <File FileName="../../../../../../Downloads/ISPService (1).cs" Line="1" Column="1" />
-      <File FileName="Assets/TestGame/Scripts/torus.cs" Line="58" Column="5" />
+      <File FileName="Assets/TestGame/Scripts/torus.cs" Line="59" Column="12" />
+      <File FileName="Assets/TestGame/Scripts/pillarright.cs" Line="21" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

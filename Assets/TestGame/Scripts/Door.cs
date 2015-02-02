@@ -21,11 +21,13 @@ public class Door : MonoBehaviour
 		{
 		
 		}
-	
+
+
+		
 		// Update is called once per frame
 		void Update ()
 		{
-
+				bool isTouching = false;
 				foreach (Touch curTouch in Input.touches) {
 						Ray ray = Camera.main.ScreenPointToRay (curTouch.position);
 						RaycastHit hit;
@@ -35,6 +37,7 @@ public class Door : MonoBehaviour
 												screenSpace = Camera.main.WorldToScreenPoint (this.transform.position);//将世界坐标点转为屏幕坐标点
 												offset = this.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (curTouch.position.x, curTouch.position.y, screenSpace.z));
 										}
+										isTouching = true;
 										//if (curTouch.phase == TouchPhase.Moved) {
 										//var cameraTransform = Camera.main.transform.InverseTransformPoint (0, 0, 0);
 										//object.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (touch.position.x, touch.position.y, cameraTransform.z - 0.5));
@@ -46,8 +49,12 @@ public class Door : MonoBehaviour
 						}
 						
 				}
-				
-				
+			
+				if (isTouching) {
+						this.rigidbody.isKinematic = true;
+				} else {
+						this.rigidbody.isKinematic = false;
+				}
 				if (isLeft) {
 						if (transform.position.x < xPosition) {
 								transform.position = new Vector3 (xPosition, transform.position.y, transform.position.z);
