@@ -1,13 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TestGame/Scripts/Test1/pole.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TestGame/Scripts/Test1/T1torus.cs">
     <Files>
-      <File FileName="Assets/TestGame/Scripts/Door.cs" Line="61" Column="8" />
-      <File FileName="Assets/TestGame/Scripts/torus.cs" Line="85" Column="1" />
-      <File FileName="Assets/TestGame/Scripts/pillarright.cs" Line="18" Column="1" />
+      <File FileName="Assets/TestGame/Scripts/torus.cs" Line="1" Column="1" />
+      <File FileName="Assets/TestGame/Scripts/Door.cs" Line="18" Column="4" />
+      <File FileName="Assets/TestGame/Scripts/pillarright.cs" Line="1" Column="1" />
       <File FileName="Assets/TestGame/Scripts/GameController.cs" Line="45" Column="25" />
-      <File FileName="Assets/TestGame/Scripts/Test1/T1torus.cs" Line="17" Column="24" />
+      <File FileName="Assets/TestGame/Scripts/Test1/T1torus.cs" Line="111" Column="4" />
       <File FileName="Assets/TestGame/Scripts/Test1/pole.cs" Line="14" Column="3" />
+      <File FileName="Assets/TestGame/Scripts/raypos.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

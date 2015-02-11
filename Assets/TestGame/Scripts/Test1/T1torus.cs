@@ -15,7 +15,7 @@ public class T1torus : MonoBehaviour
 		public BoxCollider _boxCollider;
 		public GameObject _touchTrigger;
 		public pole goalPole;
-
+		public Vector3 takeTransform;
 		private GameController _GameController;
 		/// <summary>
 		/// Delegate method used by observing parties of the OnNet event 
@@ -66,41 +66,48 @@ public class T1torus : MonoBehaviour
 								if (hit.collider == this._touchTrigger.collider) {
 										isTouching = true;
 										if (curTouch.phase == TouchPhase.Began && this.touching == false) {
+												Debug.Log ("BeganTouch");
 												screenSpace = Camera.main.WorldToScreenPoint (this.transform.position);//将世界坐标点转为屏幕坐标点
 												offset = this.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (curTouch.position.x, curTouch.position.y, screenSpace.z));
 										}
+										Debug.Log ("TOUCH!!");
 										//if (curTouch.phase == TouchPhase.Moved) {
 										//var cameraTransform = Camera.main.transform.InverseTransformPoint (0, 0, 0);
 										//object.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (touch.position.x, touch.position.y, cameraTransform.z - 0.5));
 										Vector3 curScreenSpace = new Vector3 (curTouch.position.x, curTouch.position.y, screenSpace.z);//获得初点的屏幕坐标点
 										Vector3 curPosition = Camera.main.ScreenToWorldPoint (curScreenSpace) + offset;//换算出目标点的世界坐标						
-										transform.position = new Vector3 (curPosition.x, curPosition.y, transform.position.z);
+										this.takeTransform = new Vector3 (curPosition.x, curPosition.y, transform.position.z);
 										//}
 										break;
 								}
-								
 						}
-						
 				}
 
 				if (isTouching) {
-						this.rigidbody.useGravity = false;	
+						//this.rigidbody.useGravity = false;
 						this.touching = true;
-						
-						
 				} else {
-						this.rigidbody.useGravity = true;
+						//this.rigidbody.useGravity = true;
 						this.touching = false;
-						
 				}
 		}
 
 		void OnTriggerEnter (Collider other)
 		{
 				if (other == goalPole.collider) {
-					_GameController.OnRing();
+						_GameController.OnRing ();
 				}
 		
+		}
+
+		void FixedUpdate ()
+		{
+				if (this.touching) {
+						this.rigidbody.useGravity = false;
+						this.transform.position = this.takeTransform;
+				} else {
+						this.rigidbody.useGravity = true;
+				}
 		}
 //	IEnumerator OnMouseDown()
 //	{
